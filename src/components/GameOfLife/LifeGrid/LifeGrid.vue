@@ -1,22 +1,27 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import LifeCell from '../LifeCell/LifeCell.vue';
+import { useGameOfLifeStore } from '@/stores/gameOfLife';
 
 const props = defineProps<{
     dimension: number,
 }>()
 const MAX_DIMENSION = 50;
+const gameOfLifeStore = useGameOfLifeStore()
 
 const isDimensionAcceptable = computed(() => {
     return props.dimension > 0 && props.dimension < MAX_DIMENSION + 1;
 })
+function toggleLife(index: number) {
+    gameOfLifeStore.toggleCell(index)
+}
 </script>
 
 <template>
     <div>
         <div v-if="isDimensionAcceptable" class="cell-container">
-            <LifeCell v-for="i in (dimension * dimension)" :key="`life-cell-component-${i}`" class="life-cell"
-                data-test="life-cell-component">
+            <LifeCell v-for="(isCellAlive, index) in (gameOfLifeStore.cellList)" :key="`life-cell-component-${index}`"
+                class="life-cell" data-test="life-cell-component" @click="toggleLife(index)" :isAlive="isCellAlive">
             </LifeCell>
         </div>
         <div v-else>

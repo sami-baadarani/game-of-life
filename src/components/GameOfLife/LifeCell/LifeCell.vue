@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-    <div :class="{ alive: isAlive }" />
+    <div :class="{ alive: isAlive }" typeof="button" />
 </template>
  
 <style scoped>
