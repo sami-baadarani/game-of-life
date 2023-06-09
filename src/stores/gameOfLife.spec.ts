@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useGameOfLifeStore } from '@/stores/gameOfLife'
 
-describe('GameOfLife', () => {
+describe('gameOfLifeStore', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })

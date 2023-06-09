@@ -5,23 +5,26 @@ import LifeCell from '../LifeCell/LifeCell.vue';
 const props = defineProps<{
     dimension: number,
 }>()
+const MAX_DIMENSION = 50;
 
 const isDimensionAcceptable = computed(() => {
-    return props.dimension > 0 && props.dimension < 101;
+    return props.dimension > 0 && props.dimension < MAX_DIMENSION + 1;
 })
-
 </script>
 
 <template>
-    <div class="cell-container" v-if="isDimensionAcceptable">
-        <LifeCell class="life-cell" data-test="life-cell-component" v-for="i in (dimension * dimension)" :key="i">
-        </LifeCell>
-    </div>
-    <div v-else>
-        <p>Please select a number between 1 and 100</p>
+    <div>
+        <div v-if="isDimensionAcceptable" class="cell-container">
+            <LifeCell v-for="i in (dimension * dimension)" :key="`life-cell-component-${i}`" class="life-cell"
+                data-test="life-cell-component">
+            </LifeCell>
+        </div>
+        <div v-else>
+            <p>Please select a number between 1 and {{ MAX_DIMENSION }}</p>
+        </div>
     </div>
 </template>
-
+ 
 <style scoped>
 .cell-container {
     display: grid;

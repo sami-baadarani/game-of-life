@@ -1,13 +1,13 @@
 <script setup lang="ts">
 defineProps<{
-    isAlive: boolean,
+    isAlive?: boolean
 }>()
 </script>
 
 <template>
-    <div :class="{ 'alive': isAlive }" />
+    <div :class="{ alive: isAlive }" />
 </template>
-
+ 
 <style scoped>
 div {
     width: 100%;
