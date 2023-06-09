@@ -7,5 +7,5 @@ import LifeGrid from './LifeGrid/LifeGrid.vue';
 </script>
 
 <template>
-    <LifeGridVue dimension="10" />
+    <LifeGrid dimension="10" />
 </template>
