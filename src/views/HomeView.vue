@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import LifeGrid from '@/components/GameOfLife/LifeGrid/LifeGrid.vue';
+
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <h1>This is the home view</h1>
+    <LifeGrid dimension="10"></LifeGrid>
   </main>
 </template>
