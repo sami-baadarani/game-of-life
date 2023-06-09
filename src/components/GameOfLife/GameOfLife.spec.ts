@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useGameOfLifeStore } from '@/stores/gameOfLife'
 
-describe('LifeCell', () => {
+describe('GameOfLife', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
   })
@@ -23,5 +23,10 @@ describe('LifeCell', () => {
     const gameOfLife = useGameOfLifeStore()
     gameOfLife.setDimension(100)
     expect(gameOfLife.cellList.length).toBe(10000)
+  })
+  it('should toggle cell value at given index', () => {
+    const gameOfLife = useGameOfLifeStore()
+    gameOfLife.toggleCell(5)
+    expect(gameOfLife.cellList[5]).toBe(true)
   })
 })

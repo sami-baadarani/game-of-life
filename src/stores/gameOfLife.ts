@@ -12,5 +12,9 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
     cellList.value = Array.from({ length: dimension.value * dimension.value }, () => false)
   }
 
-  return { cellList, getDimension, setDimension }
+  function toggleCell(cellIndex: number) {
+    cellList.value[cellIndex] = !cellList.value[cellIndex]
+  }
+
+  return { cellList, getDimension, setDimension, toggleCell }
 })
