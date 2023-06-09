@@ -17,4 +17,9 @@ describe('LifeCell', () => {
     const wrapper = mount(LifeCell, { props: { isAlive: false } })
     expect(wrapper.classes()).not.toContain('alive')
   })
+
+  it('if it was not alive, it should become alive when clicked', () => {
+    const wrapper = mount(LifeCell, { props: { isAlive: false } })
+    expect(wrapper.classes()).not.toContain('alive')
+  })
 })

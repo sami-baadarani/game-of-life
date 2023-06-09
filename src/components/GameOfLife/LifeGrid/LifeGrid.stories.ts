@@ -9,15 +9,6 @@ export default {
   argTypes: {
     dimension: 0
   }
-  //   decorators: [
-  //     () => ({
-  //       template: `
-  //       <div style="width: 100px; height: 100px;">
-  //         <story />
-  //       </div>
-  //       `
-  //     })
-  //   ]
 }
 
 export const twenty = {
@@ -26,7 +17,7 @@ export const twenty = {
   }
 }
 
-export const oneHundered = {
+export const oneHundred = {
   args: {
     dimension: 100
   }
