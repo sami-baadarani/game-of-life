@@ -36,11 +36,18 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
     return neighbors
   }
 
+  function nextGeneration() {
+    cellList.value.forEach((_, index) => {
+      evaluateCell(index)
+    })
+  }
+
   return {
     cellList,
     evaluateCell,
     getDimension,
     getNeighbors,
+    nextGeneration,
     setDimension,
     toggleCell
   }

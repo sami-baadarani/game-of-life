@@ -73,4 +73,35 @@ describe('GameOfLife', () => {
       expect(gameOfLife.cellList[4]).toBe(true)
     })
   })
+
+  describe('GameOfLife - Rules', () => {
+    it('should kill a cell with less than 2 neighbors alive', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [false, false, false, false, true, false, false, false, false]
+      gameOfLife.nextGeneration()
+      expect(gameOfLife.cellList[4]).toBe(false)
+    })
+    it('should kill a cell with more than 3 neighbors alive', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [true, true, true, true, true, true, false, true, false]
+      gameOfLife.nextGeneration()
+      expect(gameOfLife.cellList[4]).toBe(false)
+    })
+    it('should keep a cell alive with 2 or 3 neighbors alive', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [true, true, true, true, true, false, false, false, false]
+      gameOfLife.nextGeneration()
+      expect(gameOfLife.cellList[1]).toBe(true)
+    })
+    it('should revive a cell with exactly 3 neighbors alive', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [true, true, true, true, false, true, false, false, false]
+      gameOfLife.nextGeneration()
+      expect(gameOfLife.cellList[4]).toBe(true)
+    })
+  })
 })
