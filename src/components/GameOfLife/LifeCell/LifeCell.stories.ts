@@ -1,14 +1,9 @@
 import LifeCell from './LifeCell.vue'
 
-// import { action } from '@storybook/addon-actions'
-
 export default {
   title: 'GameOfLife/LifeCell',
   component: LifeCell,
   tags: ['GameOfLife', 'LifeCell'],
-  argTypes: {
-    isAlive: false
-  },
   decorators: [
     () => ({
       template: `

@@ -1,7 +1,5 @@
 import LifeGrid from './LifeGrid.vue'
 
-// import { action } from '@storybook/addon-actions'
-
 export default {
   title: 'GameOfLife/LifeGrid',
   component: LifeGrid,
