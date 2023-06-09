@@ -29,4 +29,28 @@ describe('GameOfLife', () => {
     gameOfLife.toggleCell(5)
     expect(gameOfLife.cellList[5]).toBe(true)
   })
+
+  describe('GameOfLife - Cell evaluation', () => {
+    it('should get all alive neighbors', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [false, true, false, true, false, true, false, true, false]
+      const neighbors = gameOfLife.getNeighbors(4)
+      expect(neighbors).toEqual([true, true, true, true])
+    })
+    it('should get all dead neighbors', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [true, false, true, false, true, false, true, false, true]
+      const neighbors = gameOfLife.getNeighbors(4)
+      expect(neighbors).toEqual([false, false, false, false])
+    })
+    it('should get all dead neighbors on extremities and alive neighbors elsewhere', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [true, true, true, true, true, false, true, false, true]
+      const neighbors = gameOfLife.getNeighbors(0)
+      expect(neighbors).toEqual([false, true, true, false])
+    })
+  })
 })

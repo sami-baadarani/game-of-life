@@ -16,5 +16,19 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
     cellList.value[cellIndex] = !cellList.value[cellIndex]
   }
 
-  return { cellList, getDimension, setDimension, toggleCell }
+  function evaluateCell(cellIndex: number) {
+    const isAlive = cellList.value[cellIndex]
+    const neighbors = getNeighbors(cellIndex)
+  }
+
+  function getNeighbors(cellIndex: number) {
+    const neighbors: boolean[] = []
+    neighbors.push(cellList.value[cellIndex - dimension.value] || false)
+    neighbors.push(cellList.value[cellIndex + 1] || false)
+    neighbors.push(cellList.value[cellIndex + dimension.value] || false)
+    neighbors.push(cellList.value[cellIndex - 1] || false)
+    return neighbors
+  }
+
+  return { cellList, getDimension, setDimension, toggleCell, getNeighbors }
 })
