@@ -10,8 +10,8 @@ defineProps<{
 
 <style scoped>
 div {
-    height: 100%;
     width: 100%;
+    aspect-ratio: 1;
     background-color: gray;
 }
 
