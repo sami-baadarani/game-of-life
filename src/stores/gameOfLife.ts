@@ -19,6 +19,12 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
   function evaluateCell(cellIndex: number) {
     const isAlive = cellList.value[cellIndex]
     const neighbors = getNeighbors(cellIndex)
+    const aliveNeighbors = neighbors.filter((neighbor) => neighbor)
+    if (!isAlive) {
+      cellList.value[cellIndex] = aliveNeighbors.length === 3
+    } else {
+      cellList.value[cellIndex] = aliveNeighbors.length === 2 || aliveNeighbors.length === 3
+    }
   }
 
   function getNeighbors(cellIndex: number) {
@@ -30,5 +36,12 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
     return neighbors
   }
 
-  return { cellList, getDimension, setDimension, toggleCell, getNeighbors }
+  return {
+    cellList,
+    evaluateCell,
+    getDimension,
+    getNeighbors,
+    setDimension,
+    toggleCell
+  }
 })

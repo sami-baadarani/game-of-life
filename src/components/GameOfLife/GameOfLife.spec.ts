@@ -52,5 +52,25 @@ describe('GameOfLife', () => {
       const neighbors = gameOfLife.getNeighbors(0)
       expect(neighbors).toEqual([false, true, true, false])
     })
+    it('should kill a cell with less than 2 neighbors alive', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.evaluateCell(1)
+      expect(gameOfLife.cellList[1]).toBe(false)
+    })
+    it('should kill a cell with more than 3 neighbors alive', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [true, true, true, true, true, true, true, true, true]
+      gameOfLife.evaluateCell(4)
+      expect(gameOfLife.cellList[4]).toBe(false)
+    })
+    it('should keep a cell alive with 2 or 3 neighbors alive', () => {
+      const gameOfLife = useGameOfLifeStore()
+      gameOfLife.setDimension(3)
+      gameOfLife.cellList = [true, true, true, false, true, false, true, true, true]
+      gameOfLife.evaluateCell(4)
+      expect(gameOfLife.cellList[4]).toBe(true)
+    })
   })
 })
