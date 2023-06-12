@@ -15,8 +15,6 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
 	}
 
 	function toggleCell(cellIndex: number) {
-		//todo remove
-		console.log('cellIndex :>> ', cellIndex)
 		cellList.value[cellIndex] = !cellList.value[cellIndex]
 	}
 
@@ -33,20 +31,20 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
 
 	function getNeighbors(cellIndex: number) {
 		const neighbors: boolean[] = []
-		neighbors.push(cellList.value[cellIndex - dimension.value - 1] || false)
-		neighbors.push(cellList.value[cellIndex - dimension.value] || false)
-		neighbors.push(cellList.value[cellIndex - dimension.value + 1] || false)
+		neighbors.push(cellList.value[cellIndex - +dimension.value - 1] || false)
+		neighbors.push(cellList.value[cellIndex - +dimension.value] || false)
+		neighbors.push(cellList.value[cellIndex - +dimension.value + 1] || false)
 		neighbors.push(cellList.value[cellIndex - 1] || false)
 		neighbors.push(cellList.value[cellIndex + 1] || false)
 
 		neighbors.push(
-			(cellIndex + dimension.value) % dimension.value
-				? cellList.value[cellIndex + dimension.value - 1]
+			(cellIndex + +dimension.value) % +dimension.value
+				? cellList.value[cellIndex + +dimension.value - 1]
 				: false
 		)
 
-		neighbors.push(cellList.value[cellIndex + dimension.value] || false)
-		neighbors.push(cellList.value[cellIndex + dimension.value + 1] || false)
+		neighbors.push(cellList.value[cellIndex + +dimension.value] || false)
+		neighbors.push(cellList.value[cellIndex + +dimension.value + 1] || false)
 		return neighbors
 	}
 
@@ -54,7 +52,6 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
 		cellList.value.forEach((_, index) => {
 			evaluateCell(index)
 		})
-		console.log('---------------------done---------------------')
 		cellList.value = [...newCellList.value]
 	}
 
