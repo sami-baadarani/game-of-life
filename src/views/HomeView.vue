@@ -5,7 +5,7 @@ import GameOfLife from '@/components/GameOfLife/GameOfLife.vue';
 
 <template>
   <main>
-    <h1>This is the home view</h1>
+    <h1>Welcome to the Game of Life</h1>
     <GameOfLife></GameOfLife>
   </main>
 </template>

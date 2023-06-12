@@ -43,6 +43,16 @@ function resetInterval() {
         <button v-if="!generationInterval" @click="startGeneration">Start</button>
         <button v-else @click="pauseGeneration">Pause</button>
         <button @click="reset">Reset</button>
-        <LifeGrid :dimension="dimension" />
+        <LifeGrid class="life-grid" />
     </div>
 </template>
+
+<style scoped>
+button {
+    margin-left: 1rem;
+}
+
+.life-grid {
+    margin-top: 1rem;
+}
+</style>

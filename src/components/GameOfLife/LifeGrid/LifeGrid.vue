@@ -3,14 +3,15 @@ import { computed } from 'vue';
 import LifeCell from '../LifeCell/LifeCell.vue';
 import { useGameOfLifeStore } from '@/stores/gameOfLife';
 
-const props = defineProps<{
-    dimension: number,
-}>()
 const MAX_DIMENSION = 50;
 const gameOfLifeStore = useGameOfLifeStore()
 
+const dimension = computed(() => {
+    return gameOfLifeStore.getDimension
+})
+
 const isDimensionAcceptable = computed(() => {
-    return props.dimension > 0 && props.dimension < MAX_DIMENSION + 1;
+    return dimension.value > 0 && dimension.value < MAX_DIMENSION + 1;
 })
 function toggleLife(index: number) {
     gameOfLifeStore.toggleCell(index)
