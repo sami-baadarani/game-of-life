@@ -4,15 +4,19 @@ import { defineStore } from 'pinia'
 export const useGameOfLifeStore = defineStore('gameOfLife', () => {
 	const dimension = ref(10)
 	const cellList = ref(Array.from({ length: dimension.value * dimension.value }, () => false))
+	const newCellList = ref(Array.from({ length: dimension.value * dimension.value }, () => false))
 
 	const getDimension = computed(() => dimension.value)
 
 	function setDimension(value: number) {
 		dimension.value = value
 		cellList.value = Array.from({ length: dimension.value * dimension.value }, () => false)
+		newCellList.value = Array.from({ length: dimension.value * dimension.value }, () => false)
 	}
 
 	function toggleCell(cellIndex: number) {
+		//todo remove
+		console.log('cellIndex :>> ', cellIndex)
 		cellList.value[cellIndex] = !cellList.value[cellIndex]
 	}
 
@@ -21,9 +25,9 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
 		const neighbors = getNeighbors(cellIndex)
 		const aliveNeighbors = neighbors.filter((neighbor) => neighbor)
 		if (!isAlive) {
-			cellList.value[cellIndex] = aliveNeighbors.length === 3
+			newCellList.value[cellIndex] = aliveNeighbors.length === 3
 		} else {
-			cellList.value[cellIndex] = aliveNeighbors.length === 2 || aliveNeighbors.length === 3
+			newCellList.value[cellIndex] = aliveNeighbors.length === 2 || aliveNeighbors.length === 3
 		}
 	}
 
@@ -50,6 +54,8 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
 		cellList.value.forEach((_, index) => {
 			evaluateCell(index)
 		})
+		console.log('---------------------done---------------------')
+		cellList.value = [...newCellList.value]
 	}
 
 	return {
