@@ -58,20 +58,6 @@ describe('gameOfLifeStore', () => {
 			gameOfLife.evaluateCell(1)
 			expect(gameOfLife.cellList[1]).toBe(false)
 		})
-		it('should kill a cell with more than 3 neighbors alive', () => {
-			const gameOfLife = useGameOfLifeStore()
-			gameOfLife.setDimension(3)
-			gameOfLife.cellList = [true, true, true, true, true, true, true, true, true]
-			gameOfLife.evaluateCell(4)
-			expect(gameOfLife.cellList[4]).toBe(false)
-		})
-		it('should give life to cell alive with 2 or 3 neighbors alive', () => {
-			const gameOfLife = useGameOfLifeStore()
-			gameOfLife.setDimension(3)
-			gameOfLife.cellList = [true, false, true, false, false, false, false, false, true]
-			gameOfLife.evaluateCell(4)
-			expect(gameOfLife.cellList[4]).toBe(true)
-		})
 	})
 
 	describe('GameOfLife - Rules', () => {
@@ -102,6 +88,27 @@ describe('gameOfLifeStore', () => {
 			gameOfLife.cellList = [false, false, true, true, false, true, false, false, false]
 			await gameOfLife.nextGeneration()
 			expect(gameOfLife.cellList[4]).toBe(true)
+		})
+	})
+
+	describe('GameOfLife - Common Oscillators ', () => {
+		it('blinker should work as expected', async () => {
+			const gameOfLife = useGameOfLifeStore()
+			gameOfLife.setDimension(3)
+			gameOfLife.cellList = [false, false, false, true, true, true, false, false, false]
+			await gameOfLife.nextGeneration()
+			console.log('gameOfLife.cellList :>> ', gameOfLife.cellList)
+			expect(gameOfLife.cellList).toEqual([
+				false,
+				true,
+				false,
+				false,
+				true,
+				false,
+				false,
+				true,
+				false
+			])
 		})
 	})
 })

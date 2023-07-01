@@ -16,6 +16,15 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
 
 	function toggleCell(cellIndex: number) {
 		cellList.value[cellIndex] = !cellList.value[cellIndex]
+		// console.log('First of Row :>> ', cellIndex % +dimension.value)
+		// console.log('First of Row :>> ', cellIndex % +dimension.value === 0)
+
+		// console.log('Last of Row :>> ', (cellIndex % +dimension.value) - +dimension.value)
+		// console.log('Last of Row :>> ', (cellIndex % +dimension.value) - +dimension.value === -1)
+
+		// console.log('Column :>> ', cellIndex / +dimension.value)
+		// console.log('First of column :>> ', cellIndex / +dimension.value < 1)
+		// console.log('Last of column :>> ', cellIndex / +dimension.value > +dimension.value - 1)
 	}
 
 	function evaluateCell(cellIndex: number) {
@@ -31,6 +40,13 @@ export const useGameOfLifeStore = defineStore('gameOfLife', () => {
 
 	function getNeighbors(cellIndex: number) {
 		const neighbors: boolean[] = []
+		// +dimension.value
+
+		const isFirstOfRow = cellIndex % +dimension.value === 0
+		const isLastOfRow = (cellIndex % +dimension.value) - +dimension.value === -1
+		const isFirstOfColumn = cellIndex / +dimension.value < 1
+		const isLastOfColumn = cellIndex / +dimension.value > +dimension.value - 1
+
 		neighbors.push(cellList.value[cellIndex - +dimension.value - 1] || false)
 		neighbors.push(cellList.value[cellIndex - +dimension.value] || false)
 		neighbors.push(cellList.value[cellIndex - +dimension.value + 1] || false)
